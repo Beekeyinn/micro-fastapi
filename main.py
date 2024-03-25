@@ -1,14 +1,13 @@
 import uvicorn
 from fastapi import FastAPI, Request
 
+from apps.user.router import user_router
 from base import setup
 
 app = FastAPI()
 
 
-@app.get("/")
-async def home(request: Request, name: str | None = None):
-    return {"message": "Hello World", "request": request.query_params}
+app.include_router(user_router, prefix="/user")
 
 
 setup(app)
