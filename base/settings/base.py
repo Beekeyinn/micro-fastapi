@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 load_dotenv(BASE_DIR / ".env")
 
 
-MODEL_APPS: list[str] = []
+MODEL_APPS: list[str] = ["user"]
 
 DATABASES = {
     "connections": {
@@ -17,7 +17,7 @@ DATABASES = {
             "engine": "tortoise.backends.psycopg",
             "credentials": {
                 "database": os.getenv("DATABASE_NAME"),
-                "user": os.getenv("DATABASE_USER"),
+                "user": os.getenv("DATABASE_USERNAME"),
                 "password": os.getenv("DATABASE_PASSWORD"),
                 "host": os.getenv("DATABASE_HOST"),
                 "port": int(os.getenv("DATABASE_PORT")),

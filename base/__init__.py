@@ -1,16 +1,24 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.gzip import GZipMiddleware
 from tortoise.contrib.fastapi import register_tortoise
+
 from base.settings import settings
 
 
 def setup(app: FastAPI):
-    register_tortoise(app, config=settings.DATABASES)
     handle_cors(app)
+    register_middleware(app)
+    register_database(app)
 
 
 def register_database(app):
-    register_tortoise(app, config=settings.DATABASES)
+    register_tortoise(
+        app,
+        config=settings.DATABASES,
+        generate_schemas=True,
+        add_exception_handlers=True,
+    )
 
 
 def handle_cors(app: FastAPI):
@@ -21,3 +29,7 @@ def handle_cors(app: FastAPI):
         allow_methods=getattr(settings, "CORS_ALLOW_METHODS", ["*"]),
         allow_headers=getattr(settings, "CORS_ALLOW_HEADERS", ["*"]),
     )
+
+
+def register_middleware(app: FastAPI):
+    app.add_middleware(GZipMiddleware)

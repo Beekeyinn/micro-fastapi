@@ -1,1 +1,1 @@
-from base.settings.base import settings, TORTOISE_ORM
+from base.settings.base import TORTOISE_ORM, settings
