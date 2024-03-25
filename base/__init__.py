@@ -1,9 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
+from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from tortoise.contrib.fastapi import register_tortoise
 
 from base.settings import settings
+from core.middlewares import CustomMiddleware
 
 
 def setup(app: FastAPI):
@@ -33,3 +35,6 @@ def handle_cors(app: FastAPI):
 
 def register_middleware(app: FastAPI):
     app.add_middleware(GZipMiddleware)
+    app.add_middleware(TrustedHostMiddleware, allowed_hosts=settings.ALLOWED_HOSTS)
+
+    app.add_middleware(CustomMiddleware)

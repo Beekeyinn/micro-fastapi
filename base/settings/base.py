@@ -49,6 +49,9 @@ EMAIL_SERVER: str = os.getenv("EMAIL_SERVER")
 EMAIL_FROM_NAME: str = os.getenv("EMAIL_FROM_NAME")
 
 
+ALLOWED_HOSTS = ["*"]
+
+
 class Settings:
     """
     A class to hold all constant values.
