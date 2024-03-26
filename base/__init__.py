@@ -8,9 +8,8 @@ from base.settings import settings
 from core.middlewares import CustomMiddleware
 
 
-def setup(app: FastAPI):
-    handle_cors(app)
-    register_middleware(app)
+def setup(app: FastAPI, add_shopify_middleware=False):
+    register_middleware(app, add_shopify_middleware=add_shopify_middleware)
     register_database(app)
 
 
@@ -33,8 +32,8 @@ def handle_cors(app: FastAPI):
     )
 
 
-def register_middleware(app: FastAPI):
+def register_middleware(app: FastAPI, add_shopify_middleware=False):
+    handle_cors(app)
     app.add_middleware(GZipMiddleware)
     app.add_middleware(TrustedHostMiddleware, allowed_hosts=settings.ALLOWED_HOSTS)
-
     app.add_middleware(CustomMiddleware)

@@ -37,4 +37,4 @@ aerich init -t base.settings.TORTOISE_ORM
 
 this creates migration folder
 
-## Step 4
+## Step 4 - Inspect build on session table
