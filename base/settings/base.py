@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 from base.utils import get_apps_for_database
 
-DEBUG = os.getenv("DEBUG") == "True"
+DEBUG = os.getenv("DEBUG") == "False"
 SECRET_KEY = "test"
 ALLOWED_HOSTS = ["*"]
 
@@ -50,6 +50,9 @@ EMAIL_FROM: str = os.getenv("EMAIL_FROM")
 EMAIL_PORT: int = os.getenv("EMAIL_PORT")
 EMAIL_SERVER: str = os.getenv("EMAIL_SERVER")
 EMAIL_FROM_NAME: str = os.getenv("EMAIL_FROM_NAME")
+
+SHOPIFY_API_KEY = os.getenv("SHOPIFY_API_KEY")
+SHOPIFY_API_SECRET = os.getenv("SHOPIFY_API_SECRET")
 
 
 class Settings:

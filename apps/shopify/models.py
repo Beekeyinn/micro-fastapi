@@ -1,5 +1,4 @@
-from tortoise import models
-from tortoise import fields
+from tortoise import fields, models
 
 
 class ShopifySession(models.Model):
@@ -10,7 +9,7 @@ class ShopifySession(models.Model):
     scope = fields.TextField()
     expires = fields.IntField()
     onlineAccessInfo = fields.CharField(max_length=255)
-    access_token = fields.CharField(max_length=255)
+    accessToken = fields.CharField(max_length=255)
 
     class Meta:
         table = "shopify_sessions"

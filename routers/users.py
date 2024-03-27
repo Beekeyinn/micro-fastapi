@@ -4,7 +4,7 @@ from apps.user.models import UserModel
 from apps.user.schema import UserModelSerializer
 from core.dependencies import ShopifyAPIDeependencies
 
-user_router = APIRouter(dependencies=[Depends(ShopifyAPIDeependencies)])
+user_router = APIRouter(dependencies=[Depends(ShopifyAPIDeependencies())])
 
 
 @user_router.get("/list")
@@ -18,4 +18,4 @@ async def get_all_users(request: Request, response: Response):
         }
     else:
         response.status_code = status.HTTP_401_UNAUTHORIZED
-        return {"error": "Unauthorized"}
+        return {"detail": "Unauthorized Access"}
