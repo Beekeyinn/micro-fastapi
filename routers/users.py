@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, Request, Response, status
+from fastapi.responses import JSONResponse
 
 from apps.user.models import UserModel
 from apps.user.schema import UserModelSerializer
@@ -11,11 +12,16 @@ user_router = APIRouter(dependencies=[Depends(ShopifyAPIDeependencies())])
 async def get_all_users(request: Request, response: Response):
     if request.state.is_authenticated:
         users = UserModel.all()
-        return {
-            "data": {
-                "users": await UserModelSerializer.from_queryset(users),
-            }
-        }
+        return JSONResponse(
+            content={
+                "data": {
+                    "users": await UserModelSerializer.from_queryset(users),
+                },
+            },
+            status_code=status.HTTP_200_OK,
+        )
     else:
-        response.status_code = status.HTTP_401_UNAUTHORIZED
-        return {"detail": "Unauthorized Access"}
+        return JSONResponse(
+            content={"detail": "Unauthorized Access"},
+            status_code=status.HTTP_401_UNAUTHORIZED,
+        )
